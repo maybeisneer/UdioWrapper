@@ -59,7 +59,7 @@ class UdioWrapper:
             print(f"Error making {method} request to {url}: {response.text}")
             return None
         except requests.exceptions.RequestException as e:
-            logging.error(f"Error making {method} request to {url}: {e}", exc_info=True)
+            logging.error(f"Error making {method} request to {url}: {e}", exc_info=True) #Error making logger
             return None
 
     def get_headers(self, get_request=False):
