@@ -32,27 +32,29 @@ class UdioWrapper:
             return None
 
 
-    def make_request(self, url, method, data=None, headers=None):
+    def make_request(self, url, method, data=None, headers=None, retries=3, delay=2):
         try:
             headers = headers or {}
             headers["Accept"] = "application/json, text/plain, */*"
             headers["Content-Type"] = "application/json"
             headers["Cookie"] = f"sb-api-auth-token={self.auth_token}"
-
-            if method == 'POST':
-                captcha_solution = self.solve_captcha()
-                if captcha_solution:
-                    headers["H-Captcha-Token"] = captcha_solution
-                response = requests.post(url, headers=headers, json=data)
-            else:
-                response = requests.get(url, headers=headers)
-
-            if response.status_code == 500:
-                    print(f"500 Server Error: Retrying {attempt + 1}/{retries}")
-                    time.sleep(delay)
-            else:
-                    response.raise_for_status()
-                    return response
+            
+            for attempt in range(retries):
+                print(f"Attempt {attempt + 1}/{retries}")
+                if method == 'POST':
+                    captcha_solution = self.solve_captcha()
+                    if captcha_solution:
+                        headers["H-Captcha-Token"] = captcha_solution
+                    response = requests.post(url, headers=headers, json=data)
+                else:
+                    response = requests.get(url, headers=headers)
+    
+                if response.status_code == 500:
+                        print(f"500 Server Error: Retrying {attempt + 1}/{retries}")
+                        time.sleep(delay)
+                else:
+                        response.raise_for_status()
+                        return response
 
             print(f"Error making {method} request to {url}: {response.text}")
             return None
