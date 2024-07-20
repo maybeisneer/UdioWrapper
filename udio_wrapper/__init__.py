@@ -10,6 +10,7 @@ import requests
 import os
 import time
 from twocaptcha import TwoCaptcha
+import logging
 
 class UdioWrapper:
     API_BASE_URL = "https://www.udio.com/api"
@@ -46,10 +47,17 @@ class UdioWrapper:
             else:
                 response = requests.get(url, headers=headers)
 
-            response.raise_for_status()
-            return response
+            if response.status_code == 500:
+                    print(f"500 Server Error: Retrying {attempt + 1}/{retries}")
+                    time.sleep(delay)
+            else:
+                    response.raise_for_status()
+                    return response
+
+            print(f"Error making {method} request to {url}: {response.text}")
+            return None
         except requests.exceptions.RequestException as e:
-            print(f"Error making {method} request to {url}: {e}")
+            logging.error(f"Error making {method} request to {url}: {e}", exc_info=True)
             return None
 
     def get_headers(self, get_request=False):
@@ -243,3 +251,9 @@ class UdioWrapper:
         except requests.exceptions.RequestException as e:
             print(f"Failed to download the song. Error: {e}")
 
+auth_token = "your_api_key_here"
+twocaptcha_api_key = "e565f9c19a3eccd58ebc8ee4a32eccc3"
+udio_wrapper = UdioWrapper(auth_token, twocaptcha_api_key)
+response = udio_wrapper.make_request("https://www.udio.com/api/generate-proxy", "POST")
+if response:
+    print(response.json())
