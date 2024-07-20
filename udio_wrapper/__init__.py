@@ -9,20 +9,43 @@ Description: Generates songs using the Udio API using textual prompts.
 import requests
 import os
 import time
+from twocaptcha import TwoCaptcha
 
 class UdioWrapper:
     API_BASE_URL = "https://www.udio.com/api"
 
-    def __init__(self, auth_token):
+    def __init__(self, auth_token, twocaptcha_api_key):
         self.auth_token = auth_token
         self.all_track_ids = []
+        self.solver = TwoCaptcha(twocaptcha_api_key)
+
+    def solve_captcha(self):
+        try:
+            result = self.solver.hcaptcha(
+                sitekey='2945592b-1928-43a9-8473-7e7fed3d752e',
+                url='https://www.udio.com/api/generate-proxy'
+            )
+            return result['code']
+        except Exception as e:
+            print(f"Failed to solve captcha: {e}")
+            return None
+
 
     def make_request(self, url, method, data=None, headers=None):
         try:
+            headers = headers or {}
+            headers["Accept"] = "application/json, text/plain, */*"
+            headers["Content-Type"] = "application/json"
+            headers["Cookie"] = f"sb-api-auth-token={self.auth_token}"
+
             if method == 'POST':
+                captcha_solution = self.solve_captcha()
+                if captcha_solution:
+                    headers["H-Captcha-Token"] = captcha_solution
                 response = requests.post(url, headers=headers, json=data)
             else:
                 response = requests.get(url, headers=headers)
+
             response.raise_for_status()
             return response
         except requests.exceptions.RequestException as e:
