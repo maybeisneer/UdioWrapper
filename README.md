@@ -215,9 +215,9 @@ If you'd like to contribute to this project, feel free to fork the repository an
  ```
 - Installed and applied nginx a high performance web server and a reverse proxy server for the generate-proxy error
   To access the nginx config file use the following command;
-
-  ```sudo nano /etc/nginx/sites-available/default
-    ```
+```
+    sudo nano /etc/nginx/sites-available/default
+```
   The following configuration will be displayed; where the proxy redirects to pyproxy.com
 ```
     server {
@@ -259,7 +259,7 @@ If you'd like to contribute to this project, feel free to fork the repository an
     }
 
     index index.html index.htm index.nginx-debian.html;
-}
+ }
 
 ```
 - Make sure to restart the nginx server and also check status server
