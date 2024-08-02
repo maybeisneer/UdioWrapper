@@ -253,10 +253,3 @@ class UdioWrapper:
             print(f"Downloaded {song_title} with url {song_url} to {file_path}")
         except requests.exceptions.RequestException as e:
             print(f"Failed to download the song. Error: {e}")
-
-auth_token = "your_api_key_here" #add yout api key generated from cookies as per README instructions
-twocaptcha_api_key = "e565f9c19a3eccd58ebc8ee4a32eccc3"
-udio_wrapper = UdioWrapper(auth_token, twocaptcha_api_key)
-response = udio_wrapper.make_request("https://www.udio.com/api/generate-proxy", "POST")
-if response:
-    print(response.json())
