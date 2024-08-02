@@ -15,8 +15,9 @@ import logging
 class UdioWrapper:
     API_BASE_URL = "https://www.udio.com/api"
 
-    def __init__(self, auth_token, twocaptcha_api_key):
-        self.auth_token = auth_token
+    def __init__(self, auth_token0, auth_token1, twocaptcha_api_key):
+        self.auth_token = auth_token0
+        self.auth_token1 = auth_token1
         self.all_track_ids = []
         self.solver = TwoCaptcha(twocaptcha_api_key)
 
@@ -66,7 +67,7 @@ class UdioWrapper:
         headers = {
             "Accept": "application/json, text/plain, */*" if get_request else "application/json",
             "Content-Type": "application/json",
-            "Cookie": f"; sb-api-auth-token={self.auth_token}",
+            "Cookie": f";  sb-ssr-production-auth-token.0={self.auth_token0};  sb-ssr-production-auth-token.1={self.auth_token1}",
             "Origin": "https://www.udio.com",
             "Referer": "https://www.udio.com/my-creations",
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
