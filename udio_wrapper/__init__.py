@@ -38,7 +38,7 @@ class UdioWrapper:
             headers = headers or {}
             headers["Accept"] = "application/json, text/plain, */*"
             headers["Content-Type"] = "application/json"
-            headers["Cookie"] = f"sb-api-auth-token={self.auth_token}"
+            headers["Cookie"] = f"sb-ssr-production-auth-token.0={self.auth_token0};  sb-ssr-production-auth-token.1={self.auth_token1}"
             
             for attempt in range(retries):
                 print(f"Attempt {attempt + 1}/{retries}")
