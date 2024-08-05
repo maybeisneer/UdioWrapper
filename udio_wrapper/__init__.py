@@ -176,6 +176,13 @@ class UdioWrapper:
             "prompt": prompt,
             "samplerOptions": {
                 "seed": seed,
+                "bypass_prompt_optimization": False,
+                "prompt_strength": 0.5,
+                "clarity_strength": 0.25,
+                "lyrics_strength": 0.5,
+                "generation_quality": 0.75,
+                "audio_conditioning_length_seconds": 130,
+                "use_2min_model": False,
                 "audio_conditioning_type": "continuation",
                 "user_audio_conditioning_path": audio_conditioning_path
             }
