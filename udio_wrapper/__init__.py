@@ -175,7 +175,7 @@ class UdioWrapper:
         data = {
             "prompt": prompt,
             "samplerOptions": {
-                "seed": seed,
+                "seed": int(seed),
                 "bypass_prompt_optimization": False,
                 "prompt_strength": 0.5,
                 "clarity_strength": 0.25,
