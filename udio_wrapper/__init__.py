@@ -11,6 +11,7 @@ import os
 import time
 from twocaptcha import TwoCaptcha
 import logging
+import json
 
 class UdioWrapper:
     API_BASE_URL = "https://www.udio.com/api"
@@ -189,6 +190,11 @@ class UdioWrapper:
         }
         if custom_lyrics:
             data["lyricInput"] = custom_lyrics
+
+        print("Request URL:", url)
+        print("Request Headers:", json.dumps(headers, indent=2))
+        print("Request Data:", json.dumps(data, indent=2))
+
         response = self.make_request(url, 'POST', data, headers)
         return response.json() if response else None
 
