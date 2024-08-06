@@ -190,7 +190,19 @@ class UdioWrapper:
         if custom_lyrics:
             data["lyricInput"] = custom_lyrics
         response = self.make_request(url, 'POST', data, headers)
+
+        print(f"URL: {url}")
+        print(f"Headers: {headers}")
+        print(f"Data: {json.dumps(data, indent=2)}")
+    
+        response = self.make_request(url, 'POST', data, headers)
+    
+        print(f"Response status code: {response.status_code}")
+        print(f"Response headers: {response.headers}")
+        print(f"Response content: {response.text}")
+    
         return response.json() if response else None
+
 
     def generate_extend_song(self, prompt, seed, audio_conditioning_path, audio_conditioning_song_id, custom_lyrics=None):
         url = f"{self.API_BASE_URL}/generate-proxy"
