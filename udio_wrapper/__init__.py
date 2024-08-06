@@ -69,7 +69,7 @@ class UdioWrapper:
             "Content-Type": "application/json",
             "Cookie": f";  sb-ssr-production-auth-token.0={self.auth_token0};  sb-ssr-production-auth-token.1={self.auth_token1}",
             "Origin": "https://www.udio.com",
-            "Referer": "https://www.udio.com/my-creations",
+            "Referer": "https://www.udio.com/create",
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
             "Sec-Fetch-Site": "same-origin",
             "Sec-Fetch-Mode": "cors",
