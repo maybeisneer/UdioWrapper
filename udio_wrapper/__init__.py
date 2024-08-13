@@ -9,6 +9,7 @@ Description: Generates songs using the Udio API using textual prompts.
 import requests
 import os
 import time
+import json
 from twocaptcha import TwoCaptcha
 import logging
 
