@@ -189,8 +189,8 @@ class UdioWrapper:
             }
         }
         if custom_lyrics:
-            data["lyrics"] = custom_lyrics
-            data["lyrics_type"] = "user"
+            data["gen_params"]["lyrics"] = custom_lyrics
+            data["gen_params"]["lyrics_type"] = "user"
         response = self.make_request(url, 'POST', data, headers)
         return response.json() if response else None
 
