@@ -172,6 +172,7 @@ class UdioWrapper:
                 "prompt": prompt,
                 "seed": seed,
                 "bypass_prompt_optimization": False,
+                "song_section_start": 0,
                 "prompt_strength": 0.5,
                 "clarity_strength": 0.25,
                 "lyrics_strength": 0.5,
