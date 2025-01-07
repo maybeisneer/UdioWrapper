@@ -172,15 +172,15 @@ class UdioWrapper:
                 "prompt": prompt,
                 "seed": seed,
                 "bypass_prompt_optimization": False,
-                "song_section_start": 0.4,
                 "prompt_strength": 0.5,
                 "clarity_strength": 0.25,
                 "lyrics_strength": 0.5,
                 "generation_quality": 0.75,
                 "model_type": "udio32-v1.5",
                 "lyrics_type": "generate",
+                "negative_prompt": "",
                 "config": {
-                   "mode": "precede",
+                   "mode": "continuation",
                    "context_length": 130,
                    "source": {
                        "source_type": "file",
