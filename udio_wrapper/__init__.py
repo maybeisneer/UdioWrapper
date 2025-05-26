@@ -180,6 +180,9 @@ class UdioWrapper:
                 "model_type": "udio32-v1.5",
                 "lyrics_type": "generate",
                 "negative_prompt": "",
+                "use_allegro": True,
+                "use_style": False,
+                "bpm_enabled": False,
                 "config": {
                     "mode": "continuation",
                     "context_length": 130,
